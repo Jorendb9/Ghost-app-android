@@ -1,8 +1,8 @@
 # Ghost app for Android
 
-Joren de Bruin
-10631267 
-Native App Studio
+<br>Joren de Bruin</br>
+<br>10631267 </br>
+<br>Native App Studio</br>
 
 ## Summary
 
