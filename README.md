@@ -1,5 +1,9 @@
 # Ghost app for Android
 
+Joren de Bruin
+10631267 
+Native App Studio
+
 ## Summary
 
 Ghost is a game app for Android for two players. Players take turns, successively adding letters to a growing word. The letters have to form the beginning of a possible, existing word at all times, and the first player to complete the word loses.
