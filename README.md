@@ -22,5 +22,5 @@ Ghost is a game app for Android for two players. Players take turns, successivel
 ## Frameworks
 
 * Some form of text view, as well as a way to enter text as User Input
-* A way to use dictionaries as a resource and look through them
-* Widgets such as imageview, buttons, checkmarks (for the options menu).
+* A way to use dictionaries as a resource and search through them
+* Widgets such as imageview, buttons, checkmarks (for the options menu)
