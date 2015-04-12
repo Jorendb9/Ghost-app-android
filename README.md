@@ -14,3 +14,4 @@ Ghost is a game app for Android for two players. Players take turns, successivel
 
 ## Sketches
 
+![appsketch1](https://cloud.githubusercontent.com/assets/11808883/7107708/05be1758-e16e-11e4-984d-257cde11faee.png)
