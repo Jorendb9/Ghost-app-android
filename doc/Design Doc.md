@@ -5,10 +5,11 @@
 <br>Native App Studio</br>
 
 ## Sketches
-
-![sketch1006](https://cloud.githubusercontent.com/assets/11808883/7220993/a35ee29e-e6dc-11e4-80c0-c5370a9ed67f.jpg)
-![sketch2007](https://cloud.githubusercontent.com/assets/11808883/7221030/a64ff2c2-e6dc-11e4-9e43-a7bc30f83e3a.jpg)
 ![sketch3008](https://cloud.githubusercontent.com/assets/11808883/7221031/aa19ab64-e6dc-11e4-9395-a91649c5b1a4.jpg)
+![sketch2007](https://cloud.githubusercontent.com/assets/11808883/7221030/a64ff2c2-e6dc-11e4-9e43-a7bc30f83e3a.jpg)
+![sketch1006](https://cloud.githubusercontent.com/assets/11808883/7220993/a35ee29e-e6dc-11e4-80c0-c5370a9ed67f.jpg)
+
+
 
 ## Classes and Methods
 ###Player.java Activity
