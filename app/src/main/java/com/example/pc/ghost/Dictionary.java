@@ -23,7 +23,7 @@ public class Dictionary{
     public String filter(String letter){
         // split dictionary into Linked List
         List<String> wordList = new LinkedList<String>(Arrays.asList(dict.split("[\r\n]+")));
-        // check if a word starts with letter string, remove from list
+        // check if a word starts with letter string, remove from list if it doesn't
         Iterator<String> itr = wordList.iterator();
         while (itr.hasNext())
         {
@@ -42,18 +42,21 @@ public class Dictionary{
 
     }
 
-    public int count()
+    // count number of words in list after filtering
+    public int count(String letter)
     {
-        String[] temp = dict.split("[\r\n]+");
+        String filterList = filter(letter);
+        String[] temp = filterList.split("[\r\n]+");
         return temp.length;
     }
 
-
+    // return words left in list after filtering
     public String result(String cWord)
     {
         return filter(cWord);
     }
 
+    // return original list of words used
     public String reset()
     {
         return dict;

@@ -15,7 +15,7 @@ public class Game
 
     public void guess(String cLetter)
     {
-        // Creates the current word out of the letter inputs
+        // Builds the current word out of the letter inputs
         StringBuilder cBuild = new StringBuilder();
 
         if (firstLetter == true)
@@ -34,7 +34,7 @@ public class Game
         dictionary.filter(cWord);
 
     }
-
+    // returns true if player 1's turn is up, switches turns
     public boolean turn()
     {
         if (player1Turn == true)
@@ -70,7 +70,7 @@ public class Game
             return false;
         }
     }
-
+    // checks whose turn it was when the game ended
     public boolean winner()
     {
         if (player1Turn == true)
@@ -83,6 +83,7 @@ public class Game
         }
     }
 
+    // returns current word
     public String word()
     {
         return cWord;

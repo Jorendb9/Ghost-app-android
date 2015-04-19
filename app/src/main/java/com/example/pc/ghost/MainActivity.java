@@ -22,16 +22,12 @@ public class MainActivity extends ActionBarActivity {
 
 
         TextView view = (TextView) findViewById(R.id.playerTurn);
-
         TextView view2 = (TextView) findViewById(R.id.playerWord);
 
 
 
-        // Button ButtonNext;
-        // ButtonNext = (Button) findViewById(R.id.button);
 
-
-
+        // Test values
         view.setText("Player 1 Turn");
         game.guess("r");
         view2.setText(game.word());
@@ -55,6 +51,8 @@ public class MainActivity extends ActionBarActivity {
         view.setText("Player 2 Turn");
         game.guess("t");
         view2.setText(game.word());
+
+        // check if game ends, show winner
         if (game.ended())
         {
             if (game.winner())
@@ -66,12 +64,6 @@ public class MainActivity extends ActionBarActivity {
                 view.setText("Player 2 Wins!");
             }
         }
-
-
-
-
-
-
 
     }
 
@@ -99,15 +91,5 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-    public void ButtonNext(View view)
-    {
-
-
-    }
-
-
-
 
 }
