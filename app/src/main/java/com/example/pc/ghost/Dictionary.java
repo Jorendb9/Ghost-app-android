@@ -4,7 +4,16 @@ package com.example.pc.ghost;
 
 
 
+import android.content.Context;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,47 +22,55 @@ import java.util.List;
 
 public class Dictionary{
     private String dict;
-    String wordToCheck;
+    String currentWord;
+    HashSet wordList = new HashSet();
 
-    Dictionary(String words){
+
+    Dictionary(Context context, String words) throws IOException {
 
         dict = words;
+        InputStream ips;
+        ips = context.getResources().openRawResource(R.raw.english);
+        BufferedReader br = new BufferedReader(new InputStreamReader(ips));
+
+        String current = br.readLine();
+        while (current != null);{
+            wordList.add(current);
+            current = br.readLine();
+            }
+
+
     }
 
-    public String filter(String letter){
-        // split dictionary into Linked List
-        List<String> wordList = new LinkedList<String>(Arrays.asList(dict.split("[\r\n]+")));
+    public void filter(String letter){
+
         // check if a word starts with letter string, remove from list if it doesn't
-        Iterator<String> itr = wordList.iterator();
+        Iterator itr = wordList.iterator();
         while (itr.hasNext())
         {
-            wordToCheck = itr.next();
-            if(!wordToCheck.startsWith(letter)){
+            currentWord = itr.next().toString();
+            if(!currentWord.startsWith(letter)){
                 itr.remove();
             }
         }
-        // convert filtered List back to string
-        StringBuilder fBuilder = new StringBuilder();
-        for(String s : wordList)
-        {
-            fBuilder.append(s);
-        }
-        return fBuilder.toString();
 
     }
 
     // count number of words in list after filtering
-    public int count(String letter)
+    public int count()
     {
-        String filterList = filter(letter);
-        String[] temp = filterList.split("[\r\n]+");
-        return temp.length;
+        return wordList.size();
     }
 
-    // return words left in list after filtering
-    public String result(String cWord)
+    // return single word in list after filtering
+    public String result()
     {
-        return filter(cWord);
+        Iterator iter = wordList.iterator();
+
+        String resultWord = iter.next();
+        return resultWord;
+
+
     }
 
     // return original list of words used
