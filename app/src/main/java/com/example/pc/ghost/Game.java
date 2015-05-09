@@ -53,20 +53,17 @@ public class Game
     public boolean ended()
     {
         // if the filtered dictionary result equals the current word game ends
-        if (dictionary.result(cWord).equals(cWord))
+        if (dictionary.result(cWord) == true)
         {
-            System.out.println(dictionary.result(cWord));
             return true;
         }
         // if the filter found no words, game ends
-        else if (dictionary.result(cWord).isEmpty())
+        else if (dictionary.count() == 0)
         {
-            System.out.println(dictionary.result(cWord));
             return true;
         }
         else
         {
-            System.out.println(dictionary.result(cWord));
             return false;
         }
     }
