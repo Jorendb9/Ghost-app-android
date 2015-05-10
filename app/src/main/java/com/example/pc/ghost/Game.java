@@ -13,7 +13,7 @@ public class Game
         dictionary = dict;
     }
 
-    public void guess(String cLetter)
+    public String guess(String cLetter)
     {
         // Builds the current word out of the letter inputs
         StringBuilder cBuild = new StringBuilder();
@@ -31,7 +31,8 @@ public class Game
 
         cWord = cBuild.toString();
 
-        dictionary.filter(cWord);
+
+        return cWord;
 
     }
     // returns true if player 1's turn is up, switches turns

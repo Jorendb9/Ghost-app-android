@@ -5,9 +5,12 @@ package com.example.pc.ghost;
 
 
 import android.content.Context;
+import android.util.Log;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,35 +20,38 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
+import java.util.Scanner;
+import java.util.Set;
 
 
 public class Dictionary{
-    private String dict;
     String currentWord;
-    HashSet wordList = new HashSet();
+    HashSet dict = new HashSet();
+    HashSet tempDict;
 
+    Dictionary(Context ctx) {
 
-    Dictionary(Context context, String words) throws IOException {
-
-        dict = words;
-        InputStream ips;
-        ips = context.getResources().openRawResource(R.raw.english);
-        BufferedReader br = new BufferedReader(new InputStreamReader(ips));
-
-        String current = br.readLine();
-        while (current != null);{
-            wordList.add(current);
-            current = br.readLine();
+        InputStream ips = ctx.getResources().openRawResource(R.raw.english);
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(ips));
+        Log.d("Joren", "Attempting to construct the dictionary");
+        try {
+            String line = bufferedReader.readLine();
+            while (line != null){
+                dict.add(line);
+                line = bufferedReader.readLine();
             }
 
-
+        } catch (IOException e){
+            dict.clear();
+            Log.d("Joren", "Construction failed");
+        }
+        Log.d("Joren", "Construction complete");
     }
 
     public void filter(String letter){
 
         // check if a word starts with letter string, remove from list if it doesn't
-        Iterator itr = wordList.iterator();
+        Iterator itr = dict.iterator();
         while (itr.hasNext())
         {
             currentWord = itr.next().toString();
@@ -59,24 +65,20 @@ public class Dictionary{
     // count number of words in list after filtering
     public int count()
     {
-        return wordList.size();
+        return dict.size();
     }
 
     // return single word in list after filtering
-    public String result()
+    public Boolean result(String word)
     {
-        Iterator iter = wordList.iterator();
-
-        String resultWord = iter.next();
-        return resultWord;
-
+        return dict.contains(word);
 
     }
 
     // return original list of words used
-    public String reset()
+    public void reset()
     {
-        return dict;
+        dict = tempDict;
     }
 
 
