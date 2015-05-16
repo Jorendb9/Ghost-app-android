@@ -16,10 +16,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-        <activity android:name=".Names"></activity>
-
+        <activity
+            android:name=".Names"
+            android:label="@string/title_activity_names"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.pc.ghost.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Namelist"
+            android:label="@string/title_activity_namelist" >
+        </activity>
     </application>
 
 </manifest>
