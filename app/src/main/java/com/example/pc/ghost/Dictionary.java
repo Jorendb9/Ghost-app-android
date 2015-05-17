@@ -28,10 +28,17 @@ public class Dictionary{
     String currentWord;
     HashSet dict = new HashSet();
     HashSet tempDict;
+    InputStream ips;
 
-    Dictionary(Context ctx) {
-
-        InputStream ips = ctx.getResources().openRawResource(R.raw.english);
+    Dictionary(Context ctx, String language) {
+        if (language == "dutch")
+        {
+            ips = ctx.getResources().openRawResource(R.raw.dutch);
+        }
+        else
+        {
+            ips = ctx.getResources().openRawResource(R.raw.english);
+        }
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(ips));
         Log.d("Joren", "Attempting to construct the dictionary");
         try {

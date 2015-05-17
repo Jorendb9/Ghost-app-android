@@ -20,6 +20,9 @@ import android.view.GestureDetector;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -33,6 +36,8 @@ public class MainActivity extends ActionBarActivity {
     String Player1Name;
     String Player2Name;
     private GestureDetectorCompat gestureDetectorCompat;
+    public static List<String> NameList = new ArrayList<String>();
+    public static HashMap<String, Integer> ScoreList = new HashMap<String, Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +45,12 @@ public class MainActivity extends ActionBarActivity {
         Log.d("Joren", "onCreate started");
 
         // retrieve player names
-        Intent intent = new Intent(
-                MainActivity.this, Names.class);
-        startActivityForResult(intent, 1);
+        if (NameList.size() == 0)
+        {
+            Intent intent = new Intent(
+                    MainActivity.this, Names.class);
+            startActivityForResult(intent, 1);
+        }
 
         setContentView(R.layout.activity_main);
 
@@ -53,7 +61,7 @@ public class MainActivity extends ActionBarActivity {
         view = (TextView) findViewById(R.id.playerTurn);
         view2 = (TextView) findViewById(R.id.playerWord);
         WordEntry = (EditText) findViewById(R.id.editText);
-        dictionary = new Dictionary(getApplicationContext());
+        dictionary = new Dictionary(getApplicationContext(), "english");
         game = new Game(dictionary);
         game.turn();
 
@@ -87,11 +95,12 @@ public class MainActivity extends ActionBarActivity {
                         {
                             if (game.winner())
                             {
-                                view.setText(Player1Name+ " Wins!");
+                                onVictory(Player1Name);
+
                             }
                             else
                             {
-                                view.setText(Player2Name+ " Wins!");
+                                onVictory(Player2Name);
                             }
                         }
 
@@ -117,6 +126,17 @@ public class MainActivity extends ActionBarActivity {
                 Player2Name = data.getStringExtra("name2");
             }
         }
+    }
+
+
+    public void onVictory(String Player)
+    {
+        ScoreList.put(Player, ScoreList.get(Player) + 1);
+        int score = ScoreList.get(Player);
+        String displayScore = Integer.toString(score);
+        view.setText(Player+ " Wins! Your total score is: " + displayScore);
+        int index = NameList.indexOf(Player);
+        NameList.set(index, Player + " " + displayScore);
     }
 
 
@@ -157,13 +177,13 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         public boolean onFling(MotionEvent event1, MotionEvent event2,
-                               float velocityX, float velocityY) {
+                               float velocityX, float velocityY)
+        {
 
-
-
-            if(event2.getX() < event1.getX()){
+            if(event2.getX() < event1.getX())
+            {
                 Toast.makeText(getBaseContext(),
-                        "Swipe left - startActivity()",
+                        "Swipe left - startNames()",
                         Toast.LENGTH_SHORT).show();
 
                 //switch to names activity
@@ -172,7 +192,24 @@ public class MainActivity extends ActionBarActivity {
                 startActivity(intent);
             }
 
+            if(event2.getX() > event1.getX())
+            {
+                Toast.makeText(getBaseContext(),
+                        "Swipe right - startNamesList()",
+                        Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(
+                        MainActivity.this, Namelist.class);
+                startActivity(intent);
+
+
+
+
+            }
+
             return true;
+
+
         }
     }
 }

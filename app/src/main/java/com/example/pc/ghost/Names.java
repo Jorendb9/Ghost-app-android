@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +27,6 @@ public class Names extends ActionBarActivity {
     EditText nameEntry2;
     String playerName1;
     String playerName2;
-    public List<String> NameList = new ArrayList<String>();
 
 
 
@@ -43,17 +43,33 @@ public class Names extends ActionBarActivity {
         nameEntry2 =(EditText)findViewById(R.id.nameEntry2);
         namePrompt = (TextView) findViewById(R.id.namePrompt);
         nameEntry = (EditText) findViewById(R.id.nameEntry);
+        gestureDetectorCompat = new GestureDetectorCompat(this, new My2ndGestureListener());
+
 
         nameEntry.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     playerName1 = nameEntry.getText().toString();
-                    Toast.makeText(getBaseContext(),
-                            playerName1+ " added as Player 1",
-                            Toast.LENGTH_SHORT).show();
-                    //Add name to permanent list
-                    NameList.add(playerName1);
+
+                    //If name is new, add to list and initialize score as 0
+                    if (MainActivity.NameList.contains(playerName1))
+                    {
+                        Toast.makeText(getBaseContext(),
+                                playerName1+ " already exists",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(getBaseContext(),
+                                playerName1+ " added as Player 1",
+                                Toast.LENGTH_SHORT).show();
+                        MainActivity.NameList.add(playerName1);
+                        MainActivity.ScoreList.put(playerName1, 0);
+                    }
+                    nameEntry.setText("");
+
+
 
 
                     return true;
@@ -68,11 +84,23 @@ public class Names extends ActionBarActivity {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     playerName2 = nameEntry2.getText().toString();
 
-                    Toast.makeText(getBaseContext(),
-                            playerName2+ " added as Player 2",
-                            Toast.LENGTH_SHORT).show();
 
-                    NameList.add(playerName1);
+
+                    if (MainActivity.NameList.contains(playerName2))
+                    {
+                        Toast.makeText(getBaseContext(),
+                                playerName2+ " already exists",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(getBaseContext(),
+                                playerName2+ " added as Player 2",
+                                Toast.LENGTH_SHORT).show();
+                        MainActivity.NameList.add(playerName2);
+                        MainActivity.ScoreList.put(playerName2, 0);
+                    }
+                    nameEntry2.setText("");
                     return true;
                 }
                 return false;
@@ -81,10 +109,11 @@ public class Names extends ActionBarActivity {
         });
 
 
-        gestureDetectorCompat = new GestureDetectorCompat(this, new My2ndGestureListener());
+
 
 
     }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {

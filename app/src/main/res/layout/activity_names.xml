@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Player 1 Name"
+        android:hint="Player 1 Name"
         android:ems="10"
         android:id="@+id/nameEntry"
         android:imeOptions="actionDone"
@@ -35,12 +35,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Player 2 Name"
+        android:hint="Player 2 Name"
         android:ems="10"
         android:id="@+id/nameEntry2"
         android:imeOptions="actionDone"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:gravity="center"/>
+
 
 </LinearLayout>
