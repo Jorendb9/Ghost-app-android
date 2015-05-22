@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="dictionary_languages">
+        <item>Select a Dictionary Language</item>
+        <item>English</item>
+        <item>Dutch</item>
+
+    </string-array>
+</resources>

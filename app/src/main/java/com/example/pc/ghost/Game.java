@@ -2,15 +2,17 @@ package com.example.pc.ghost;
 
 
 
+
 public class Game
 {
-    private String cWord;
+    private String cWord, Reason;
     private Dictionary dictionary;
     private boolean player1Turn = true;
     private boolean firstLetter = true;
     Game(Dictionary dict)
     {
         dictionary = dict;
+
     }
 
     public String guess(String cLetter)
@@ -53,15 +55,18 @@ public class Game
 
     public boolean ended()
     {
-        // if the filtered dictionary result equals the current word game ends
+        // if the filtered dictionary contains the current word game ends
         if (dictionary.result(cWord) == true)
         {
+            Reason = cWord + " is an existing word";
             return true;
         }
         // if the filter found no words, game ends
         else if (dictionary.count() == 0)
         {
+            Reason = cWord + " does not lead to an existing word";
             return true;
+
         }
         else
         {
@@ -80,10 +85,21 @@ public class Game
             return true;
         }
     }
-
-    // returns current word
-    public String word()
+    public void customEntry(String word)
     {
-        return cWord;
+        cWord = word;
     }
+
+    public String reason()
+    {
+        return Reason;
+    }
+
+    // treat as game in progress
+    public void resume()
+    {
+        firstLetter = false;
+    }
+
+
 }

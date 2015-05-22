@@ -8,40 +8,94 @@
     android:orientation="vertical"
     android:gravity="center|top">
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name Entry"
+        android:text="Game Setup"
         android:id="@+id/namePrompt"
         android:textSize="30sp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:layout_centerVertical="true" />
 
-    <EditText
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="Player 1 Name"
+            android:ems="10"
+            android:id="@+id/nameEntry"
+            android:imeOptions="actionDone"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"/>
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner1"
+            android:layout_weight="1"
+            android:visibility = "invisible"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/activity_vertical_margin">
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="Player 2 Name"
+            android:ems="10"
+            android:id="@+id/nameEntry2"
+            android:imeOptions="actionDone"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"/>
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner2"
+            android:layout_weight="1"
+            android:visibility = "invisible"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="Player 1 Name"
-        android:ems="10"
-        android:id="@+id/nameEntry"
-        android:imeOptions="actionDone"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
-        android:gravity="center"/>
+        android:orientation="vertical"
+        android:gravity="center|top"
+        android:paddingTop="@dimen/activity_vertical_margin">
 
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner3"
+            android:layout_marginTop="20dp"
+            android:entries="@array/dictionary_languages"
+            android:layout_weight="1"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="Player 2 Name"
-        android:ems="10"
-        android:id="@+id/nameEntry2"
-        android:imeOptions="actionDone"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:gravity="center"/>
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Start Game"
+            android:id="@+id/button4"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+
 
 
 </LinearLayout>

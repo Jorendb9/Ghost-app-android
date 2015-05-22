@@ -1,37 +1,26 @@
 package com.example.pc.ghost;
 
-
-
-
-
 import android.content.Context;
 import android.util.Log;
-
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
 import java.util.Set;
 
 
 public class Dictionary{
     String currentWord;
-    HashSet dict = new HashSet();
-    HashSet tempDict;
+    Set<String> dict;
+    Set<String> dictCopy;
     InputStream ips;
 
     Dictionary(Context ctx, String language) {
-        if (language == "dutch")
+
+        dict = new HashSet<String>();
+        if (language == "Dutch")
         {
             ips = ctx.getResources().openRawResource(R.raw.dutch);
         }
@@ -47,15 +36,19 @@ public class Dictionary{
                 dict.add(line);
                 line = bufferedReader.readLine();
             }
-
         } catch (IOException e){
             dict.clear();
             Log.d("Joren", "Construction failed");
         }
         Log.d("Joren", "Construction complete");
+        dictCopy = new HashSet<String>(dict);
     }
 
+
+
+
     public void filter(String letter){
+
 
         // check if a word starts with letter string, remove from list if it doesn't
         Iterator itr = dict.iterator();
@@ -66,7 +59,6 @@ public class Dictionary{
                 itr.remove();
             }
         }
-
     }
 
     // count number of words in list after filtering
@@ -85,10 +77,8 @@ public class Dictionary{
     // return original list of words used
     public void reset()
     {
-        dict = tempDict;
+        dict = new HashSet<String>(dictCopy);
     }
-
-
 
 }
 

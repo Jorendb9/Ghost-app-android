@@ -28,6 +28,10 @@
             android:name=".Namelist"
             android:label="@string/title_activity_namelist" >
         </activity>
+        <activity
+            android:name=".Languages"
+            android:label="@string/title_activity_languages" >
+        </activity>
     </application>
 
 </manifest>
