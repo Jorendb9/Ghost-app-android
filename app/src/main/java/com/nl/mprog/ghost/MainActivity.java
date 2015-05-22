@@ -1,4 +1,9 @@
-package com.example.pc.ghost;
+package com.nl.mprog.ghost;
+
+// Joren de Bruin
+// Minor Programmeren App Studio
+// Studentnr. 10631267
+
 
 
 import android.content.Context;
@@ -7,7 +12,6 @@ import android.content.SharedPreferences;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,7 +41,7 @@ public class MainActivity extends ActionBarActivity {
 
     EditText WordEntry;
     Game game;
-    TextView view, view2;
+    TextView playerView, wordView;
     Dictionary dictionary;
     String letter, Player1Name, Player2Name, language, cWord;
     Boolean first = true;
@@ -49,14 +53,14 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("Joren", "onCreate started");
         cWord = "";
 
+
+        // load scores when applicable
         try
         {
             loadScores();
             createNameList();
-            Log.d("Joren", "Succesfully loaded");
         }
         catch (IOException e)
         {
@@ -71,16 +75,16 @@ public class MainActivity extends ActionBarActivity {
 
         // boolean to track if a game is in progress
         first = loadFirst();
-        if (first == true)
+        if (first)
         {
             retrieveNames();
         }
         setContentView(R.layout.activity_main);
 
 
-        gestureDetectorCompat = new GestureDetectorCompat(this, new MyGestureListener());
-        view = (TextView) findViewById(R.id.playerTurn);
-        view2 = (TextView) findViewById(R.id.playerWord);
+        gestureDetectorCompat = new GestureDetectorCompat(this, new swipeListener());
+        playerView = (TextView) findViewById(R.id.playerTurn);
+        wordView = (TextView) findViewById(R.id.playerWord);
         WordEntry = (EditText) findViewById(R.id.editText);
         WordEntry.setEnabled(true);
 
@@ -89,7 +93,7 @@ public class MainActivity extends ActionBarActivity {
         newGameStart(dictionary);
 
         // load state if app was shut down with a game in progress
-        if (first == false)
+        if (!first)
             {
                 loadState();
             }
@@ -117,9 +121,9 @@ public class MainActivity extends ActionBarActivity {
         first = true;
         newGameStart(dictionary);
         WordEntry.setEnabled(true);
-        WordEntry.setVisibility(view.VISIBLE);
-        view.setText(Player1Name+ "'s Turn");
-        view2.setText("");
+        WordEntry.setVisibility(View.VISIBLE);
+        playerView.setText(Player1Name+ "'s Turn");
+        wordView.setText("");
         onLetterInput();
     }
 
@@ -187,16 +191,16 @@ public class MainActivity extends ActionBarActivity {
                     game.customEntry(cWord);
                     cWord = game.guess(letter);
                     dictionary.filter(cWord);
-                    view2.setText(cWord);
+                    wordView.setText(cWord);
                     WordEntry.setText("");
                     // indicates the players turn
-                    if (game.turn()== true)
+                    if (game.turn())
                     {
-                        view.setText(Player1Name+ "'s Turn");
+                        playerView.setText(Player1Name+ "'s Turn");
                     }
                     else
                     {
-                        view.setText(Player2Name+ "'s Turn");
+                        playerView.setText(Player2Name+ "'s Turn");
                     }
                     game.turn();
                     saveCurrentState();
@@ -233,7 +237,7 @@ public class MainActivity extends ActionBarActivity {
     {
         SharedPreferences settings = getSharedPreferences("GhostPreferences", 0);
         SharedPreferences.Editor preferencesEditor = settings.edit();
-        preferencesEditor.putString("CurrentWord", view2.getText().toString());
+        preferencesEditor.putString("CurrentWord", wordView.getText().toString());
         preferencesEditor.putString("Player1", Player1Name);
         preferencesEditor.putString("Player2", Player2Name);
         preferencesEditor.putString("Language", language);
@@ -254,17 +258,17 @@ public class MainActivity extends ActionBarActivity {
         {
             game.resume();
             cWord = Word;
-            view2.setText(Word);
+            wordView.setText(Word);
             Player1Name = Player1;
             Player2Name = Player2;
             language = Language;
             if (turn == true)
             {
-                view.setText(Player1Name + "'s Turn");
+                playerView.setText(Player1Name + "'s Turn");
             }
             else
             {
-                view.setText(Player2Name + "'s Turn");
+                playerView.setText(Player2Name + "'s Turn");
             }
             game.turn();
         }
@@ -309,7 +313,7 @@ public class MainActivity extends ActionBarActivity {
     public void retrieveNames()
     {
         Intent intent = new Intent(
-                MainActivity.this, Names.class);
+                MainActivity.this, NamesActivity.class);
         startActivityForResult(intent, 1);
     }
 
@@ -325,13 +329,13 @@ public class MainActivity extends ActionBarActivity {
     {
         first = true;
         NameList.clear();
-        WordEntry.setVisibility(view.GONE);
+        WordEntry.setVisibility(View.GONE);
         WordEntry.setEnabled(false);
         ScoreList.put(Player, ScoreList.get(Player) + 1);
         createNameList();
         String displayScore = Integer.toString(ScoreList.get(Player));
-        view.setText(Player+ " Wins! Your total score is: " + displayScore);
-        view2.setText(game.reason());
+        playerView.setText(Player+ " Wins! Your total score is: " + displayScore);
+        wordView.setText(game.reason());
         try {
             saveScores();
         } catch (IOException e) {
@@ -403,7 +407,7 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+    class swipeListener extends GestureDetector.SimpleOnGestureListener {
 
         @Override
         public boolean onFling(MotionEvent event1, MotionEvent event2,
@@ -418,12 +422,12 @@ public class MainActivity extends ActionBarActivity {
             }
 
 
-            //switch to nameList (highscores) activity by swiping left
+            //switch to scoreActivity by swiping left
             if(event2.getX() > event1.getX())
             {
 
                 Intent intent = new Intent(
-                        MainActivity.this, Namelist.class);
+                        MainActivity.this, ScoreActivity.class);
                 startActivityForResult(intent, 2);
             }
 

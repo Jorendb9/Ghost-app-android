@@ -1,4 +1,4 @@
-package com.example.pc.ghost;
+package com.nl.mprog.ghost;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -1,6 +1,8 @@
-package com.example.pc.ghost;
+package com.nl.mprog.ghost;
 
-
+// Joren de Bruin
+// Minor Programmeren App Studio
+// Studentnr. 10631267
 
 
 public class Game
@@ -20,12 +22,12 @@ public class Game
         // Builds the current word out of the letter inputs
         StringBuilder cBuild = new StringBuilder();
 
-        if (firstLetter == true)
+        if (firstLetter)
         {
             cBuild.append(cLetter);
             firstLetter = false;
         }
-        else if (!firstLetter)
+        else
         {
             cBuild.append(cWord);
             cBuild.append(cLetter);
@@ -40,7 +42,7 @@ public class Game
     // returns true if player 1's turn is up, switches turns
     public boolean turn()
     {
-        if (player1Turn == true)
+        if (player1Turn)
         {
             player1Turn = false;
             return true;
@@ -56,7 +58,7 @@ public class Game
     public boolean ended()
     {
         // if the filtered dictionary contains the current word game ends
-        if (dictionary.result(cWord) == true)
+        if (dictionary.result(cWord))
         {
             Reason = cWord + " is an existing word";
             return true;
@@ -76,7 +78,7 @@ public class Game
     // checks whose turn it was when the game ended
     public boolean winner()
     {
-        if (player1Turn == true)
+        if (player1Turn)
         {
             return false;
         }

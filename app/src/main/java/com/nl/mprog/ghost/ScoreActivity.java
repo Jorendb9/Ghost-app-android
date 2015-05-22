@@ -1,6 +1,10 @@
-package com.example.pc.ghost;
+package com.nl.mprog.ghost;
 
-import android.content.Context;
+// Joren de Bruin
+// Minor Programmeren App Studio
+// Studentnr. 10631267
+
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.view.GestureDetectorCompat;
@@ -19,7 +23,7 @@ import android.widget.Toast;
 import java.io.File;
 
 
-public class Namelist extends ActionBarActivity {
+public class ScoreActivity extends ActionBarActivity {
 
     private ListView lv;
     private GestureDetectorCompat gestureDetectorCompat;
@@ -29,7 +33,7 @@ public class Namelist extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        gestureDetectorCompat = new GestureDetectorCompat(this, new My3rdGestureListener());
+        gestureDetectorCompat = new GestureDetectorCompat(this, new swipeListener3());
         setContentView(R.layout.activity_namelist);
 
 
@@ -103,12 +107,11 @@ public class Namelist extends ActionBarActivity {
     }
 
     // return on swiping right
-    class My3rdGestureListener extends GestureDetector.SimpleOnGestureListener {
+    class swipeListener3 extends GestureDetector.SimpleOnGestureListener {
 
         @Override
         public boolean onFling(MotionEvent event1, MotionEvent event2,
                                float velocityX, float velocityY) {
-
 
 
             if(event2.getX() < event1.getX())

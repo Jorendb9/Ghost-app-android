@@ -1,4 +1,8 @@
-package com.example.pc.ghost;
+package com.nl.mprog.ghost;
+
+// Joren de Bruin
+// Minor Programmeren App Studio
+// Studentnr. 10631267
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Names extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
+public class NamesActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
 
     TextView namePrompt;
     EditText nameEntry, nameEntry2;
@@ -43,7 +47,7 @@ public class Names extends ActionBarActivity implements AdapterView.OnItemSelect
         nameEntry2 =(EditText)findViewById(R.id.nameEntry2);
         namePrompt = (TextView) findViewById(R.id.namePrompt);
         nameEntry = (EditText) findViewById(R.id.nameEntry);
-        gestureDetectorCompat = new GestureDetectorCompat(this, new My2ndGestureListener());
+        gestureDetectorCompat = new GestureDetectorCompat(this, new swipeListener2());
 
 
         // show spinner of existing names when applicable
@@ -137,7 +141,6 @@ public class Names extends ActionBarActivity implements AdapterView.OnItemSelect
     {
         String name = spinner.getSelectedItem().toString();
         name = name.replaceAll("[^A-Za-z]", "");
-        Log.d("Joren", name);
         entry.setText(name);
         Toast.makeText(getBaseContext(),
                 name+ " added as " + player,
@@ -186,7 +189,7 @@ public class Names extends ActionBarActivity implements AdapterView.OnItemSelect
 
 
     // return on swiping left
-    class My2ndGestureListener extends GestureDetector.SimpleOnGestureListener {
+    class swipeListener2 extends GestureDetector.SimpleOnGestureListener {
 
 
         @Override

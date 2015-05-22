@@ -1,4 +1,8 @@
-package com.example.pc.ghost;
+package com.nl.mprog.ghost;
+
+// Joren de Bruin
+// Minor Programmeren App Studio
+// Studentnr. 10631267
 
 import android.content.Context;
 import android.util.Log;
@@ -29,7 +33,7 @@ public class Dictionary{
             ips = ctx.getResources().openRawResource(R.raw.english);
         }
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(ips));
-        Log.d("Joren", "Attempting to construct the dictionary");
+
         try {
             String line = bufferedReader.readLine();
             while (line != null){
@@ -38,9 +42,7 @@ public class Dictionary{
             }
         } catch (IOException e){
             dict.clear();
-            Log.d("Joren", "Construction failed");
         }
-        Log.d("Joren", "Construction complete");
         dictCopy = new HashSet<String>(dict);
     }
 
